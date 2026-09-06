@@ -1,4 +1,4 @@
-# Insurance Claim & Premium Prediction
+# Insurance Claim & Premium Prediction 
 
 An end-to-end machine learning project that analyzes insurance customer data to **predict insurance premium amounts** and **classify claim risk** using supervised learning techniques.
 
