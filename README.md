@@ -6,7 +6,7 @@ The project demonstrates a complete machine learning workflow — from data gene
 
 ---
 
-## Project Overview
+## Project Overview 
 
 Insurance companies need reliable ways to estimate customer premiums and identify customers who may represent higher claim risk.
 
