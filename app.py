@@ -6,4 +6,4 @@ st.set_page_config(
     layout="wide",
 )
 
-st.switch_page("pages/1_Home.py")
+st.switch_page("pages/1_Predict.py")

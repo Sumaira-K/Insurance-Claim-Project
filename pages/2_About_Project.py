@@ -1,56 +1,11 @@
-from pathlib import Path
-
 import streamlit as st
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
-CSS_PATH = ROOT_DIR / "style.css"
-
-
-def load_css(theme: str):
-    css = CSS_PATH.read_text(encoding="utf-8")
-    if theme == "dark":
-        css += """
-        .stApp { background: #0b1220; color: #f8fafc; }
-        [data-testid="stSidebar"] { background: rgba(15, 23, 42, 0.96); border-right: 1px solid rgba(251, 146, 60, 0.2); }
-        div[data-testid="stSidebarNav"] a { color: #e5e7eb !important; }
-        .hero-panel, .feature-card, .section-card, .result-card, .summary-card, .info-card, .footer-card {
-            background: #111827;
-            border-color: rgba(251, 146, 60, 0.18);
-            box-shadow: 0 12px 30px rgba(15, 23, 42, 0.24);
-        }
-        .hero-visual { background: linear-gradient(135deg, rgba(251, 146, 60, 0.10), rgba(17, 24, 39, 0.72)); }
-        .hero-stat, .amount-box, .risk-box, .summary-item, .workflow-step { background: rgba(17, 24, 39, 0.9); }
-        .stTextInput > div > div > input, .stNumberInput > div > div > input, .stSelectbox > div > div > select, [data-baseweb="select"] {
-            background: #111827 !important; color: #f8fafc !important; border-color: rgba(251, 146, 60, 0.2) !important;
-        }
-        .stButton > button, .stDownloadButton > button, .stLinkButton > button {
-            box-shadow: 0 10px 18px rgba(251, 146, 60, 0.18);
-        }
-        .empty-state { background: rgba(17, 24, 39, 0.8); border-color: rgba(251, 146, 60, 0.18); }
-        p, li, h1, h2, h3, h4, span, strong { color: #f8fafc; }
-        .hero-stat span, .summary-item span, .empty-state, .stAlert, .stCaption, .stMarkdown p { color: #d1d5db !important; }
-        """
-    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+from theme import render_header
 
 
 st.set_page_config(page_title="About Project", page_icon="📘", layout="wide")
 
-if "theme" not in st.session_state:
-    st.session_state.theme = "light"
-
-with st.sidebar:
-    st.markdown('<div class="sidebar-brand">Insurance Risk</div>', unsafe_allow_html=True)
-    theme_choice = st.radio(
-        "Theme",
-        ["☀️ Light", "🌙 Dark"],
-        index=0 if st.session_state.theme == "light" else 1,
-        horizontal=True,
-        label_visibility="collapsed",
-        key="theme_switch_about",
-    )
-    st.session_state.theme = "light" if theme_choice == "☀️ Light" else "dark"
-
-load_css(st.session_state.theme)
+render_header()
 
 st.title("About the Project")
 st.caption("Insurance Claim Risk & Premium Predictor")

@@ -218,25 +218,21 @@ This project demonstrates practical experience with:
 ## Project Structure
 
 ```text
-Insurance-Claim-Project/
-│
-├── data/
-│   └── insurance_data.csv
-│
-├── notebooks/
-│   └── insurance_claim_prediction.ipynb
-│
-├── models/
-│   └── trained_models/
-│
-├── visualizations/
-│   └── plots/
-│
+Insurance Claim Risk/
+├── app.py
+├── theme.py
+├── style.css
+├── requirements.txt
 ├── README.md
-└── requirements.txt
+├── Insurance_Claim_Risk_Predictor.ipynb
+├── insurance_claim_data.csv
+├── preprocessor.pkl
+├── premium_prediction_model.pkl
+├── claim_risk_model.pkl
+└── pages/
+    ├── 1_Predict.py
+    └── 2_About_Project.py
 ```
-
-> The project structure may evolve as additional experiments, models, and deployment components are added.
 
 ---
 
@@ -322,6 +318,16 @@ source venv/bin/activate
 ```bash
 pip install -r requirements.txt
 ```
+
+### Run the Streamlit predictor
+
+Start the dashboard from the project root:
+
+```bash
+streamlit run app.py
+```
+
+The prediction page opens with the existing trained models. Use the theme button in the upper-right corner to switch the complete interface between light and dark mode.
 
 ### 5. Run the Jupyter Notebook
 
