@@ -1,36 +1,62 @@
-# Insurance Claim & Premium Prediction 
+# Insurance Claim Risk & Premium Predictor
 
-An end-to-end machine learning project that analyzes insurance customer data to **predict insurance premium amounts** and **classify claim risk** using supervised learning techniques.
+An end-to-end machine learning project that predicts **insurance premium amounts** and **claim risk** from customer and policy-related information.
 
-The project demonstrates a complete machine learning workflow — from data generation and exploratory data analysis to preprocessing, model training, evaluation, and interpretation.
-
----
-
-## Project Overview 
-
-Insurance companies need reliable ways to estimate customer premiums and identify customers who may represent higher claim risk.
-
-This project addresses two related machine learning problems:
-
-1. **Insurance Premium Prediction** — Predict the expected insurance premium amount using regression.
-2. **Claim Risk Classification** — Predict whether a customer represents a higher or lower claim risk using classification.
-
-The project follows an end-to-end machine learning pipeline designed to demonstrate practical skills in **Python, data analysis, feature engineering, supervised learning, and model evaluation**.
+The project combines **data generation, exploratory data analysis, preprocessing, supervised machine learning, model evaluation, and a Streamlit-based prediction interface** into a complete ML workflow.
 
 ---
 
-## Objectives
+## Project Overview
 
-The primary objectives of this project are:
+Insurance premium estimation and claim-risk assessment involve multiple customer and policy-related factors. This project demonstrates how supervised machine learning can be used to analyze these factors and generate automated predictions.
 
-* Analyze insurance customer and policy-related data.
-* Identify important factors influencing insurance premiums.
-* Build a regression model to predict premium amounts.
-* Develop a classification model to predict claim risk.
-* Perform exploratory data analysis to identify patterns and relationships.
-* Preprocess numerical and categorical features appropriately.
-* Evaluate models using suitable machine learning metrics.
-* Compare model performance and interpret the results.
+The system addresses two machine learning tasks:
+
+1. **Premium Amount Prediction** — A regression model predicts the expected insurance premium amount.
+2. **Claim Risk Prediction** — A classification model predicts whether a customer is classified as higher or lower claim risk.
+
+The trained models are integrated into a **Streamlit web interface** where users can enter insurance information and receive predictions without manually running the machine learning workflow.
+
+---
+
+## Key Features
+
+* **Insurance Premium Prediction**
+* **Claim Risk Classification**
+* End-to-end machine learning workflow
+* Exploratory Data Analysis (EDA)
+* Numerical and categorical feature preprocessing
+* Saved preprocessing pipeline
+* Saved trained machine learning models
+* Interactive Streamlit prediction interface
+* Light and dark theme support
+* Dedicated project information page
+* Clean and modular application structure
+
+---
+
+## Project Results
+
+### Premium Prediction
+
+The final regression model achieved:
+
+| Metric   |     Result |
+| -------- | ---------: |
+| R² Score | **0.9590** |
+
+An R² score of 0.9590 indicates that the final model explains a large proportion of the variation in the insurance premium values within the evaluation data.
+
+### Claim Risk Prediction
+
+The final classification model achieved:
+
+| Metric   |     Result |
+| -------- | ---------: |
+| Accuracy | **72.25%** |
+| ROC-AUC  | **0.8023** |
+
+The ROC-AUC score indicates that the model provides useful discrimination between the two claim-risk classes.
 
 ---
 
@@ -38,268 +64,341 @@ The primary objectives of this project are:
 
 ### 1. Premium Amount Prediction — Regression
 
-The first problem is to predict the expected **insurance premium amount** for a customer.
+The first task predicts the expected **insurance premium amount** for a customer.
 
-**Target variable:** Insurance Premium
+**Target variable:** `premium_amount`
 
-This is treated as a **regression problem** because the target is a continuous numerical value.
+Since the target is a continuous numerical value, the problem is treated as a **regression task**.
 
-The model learns relationships between customer characteristics, policy information, and other relevant features to estimate the expected premium.
+The model uses customer, policy, claim-history, income, and coverage-related information to estimate the expected premium.
 
 ---
 
 ### 2. Claim Risk Prediction — Classification
 
-The second problem is to determine whether a customer falls into a particular **claim-risk category**.
+The second task predicts the **claim-risk category** of a customer.
 
-**Target variable:** Claim Risk
+**Target variable:** `claim_risk`
 
-This is treated as a **classification problem** because the model predicts a discrete class.
+Since the target represents discrete classes, the problem is treated as a **classification task**.
 
-The classification model can help identify potentially higher-risk customers and support data-driven insurance risk assessment.
+The classification model uses customer and policy-related characteristics to identify the predicted claim-risk category.
+
+---
+
+## Dataset
+
+The project uses a **synthetically generated insurance dataset containing 2,000 records and 10 variables**.
+
+The dataset includes:
+
+| Feature         | Description                        |
+| --------------- | ---------------------------------- |
+| Age             | Age of the customer                |
+| BMI             | Body Mass Index                    |
+| Dependents      | Number of dependents               |
+| Smoker          | Smoking status                     |
+| Policy Type     | Type of insurance policy           |
+| Claim History   | Previous claim history             |
+| Annual Income   | Customer's annual income           |
+| Coverage Amount | Insurance coverage amount          |
+| Claim Risk      | Target variable for classification |
+| Premium Amount  | Target variable for regression     |
+
+The synthetic dataset was generated to provide controlled insurance-related data for demonstrating the complete machine learning workflow.
 
 ---
 
 ## Project Workflow
 
 ```text
-Data Generation / Collection
-          ↓
+Insurance Dataset
+       ↓
 Data Understanding
-          ↓
+       ↓
 Exploratory Data Analysis
-          ↓
-Data Cleaning
-          ↓
-Feature Engineering
-          ↓
-Feature Encoding & Scaling
-          ↓
+       ↓
+Feature Preparation
+       ↓
+Feature Encoding & Preprocessing
+       ↓
 Train-Test Split
-          ↓
+       ↓
 Model Training
-      ↙         ↘
-Regression    Classification
-      ↓             ↓
-Evaluation      Evaluation
-      ↓             ↓
+       ↓
+Model Evaluation
+    ↙          ↘
+Regression   Classification
+    ↓              ↓
 Premium        Claim Risk
 Prediction     Prediction
+       ↓
+Saved Models
+       ↓
+Streamlit Interface
+       ↓
+User Predictions
 ```
 
 ---
 
 ## Exploratory Data Analysis
 
-Exploratory Data Analysis (EDA) is performed to understand the dataset and discover meaningful relationships between variables.
+Exploratory Data Analysis was performed to understand the characteristics and relationships within the insurance dataset.
 
-The analysis includes:
+The analysis included:
 
-* Distribution analysis
-* Missing-value analysis
-* Outlier identification
+* Distribution analysis of numerical variables
+* Analysis of categorical variables
+* Premium distribution analysis
+* Claim-risk distribution
 * Correlation analysis
-* Categorical feature analysis
-* Relationship between customer characteristics and premium
+* Relationship analysis between customer characteristics and premium
 * Analysis of factors associated with claim risk
 
-Visualizations are created using Python's data visualization libraries to make patterns and trends easier to interpret.
+The EDA helped identify patterns in the dataset and provided a better understanding of the variables before model training.
 
 ---
 
 ## Data Preprocessing
 
-Before model training, the dataset is prepared using appropriate preprocessing techniques.
+The input features were prepared for machine learning using a preprocessing pipeline.
 
-The preprocessing pipeline includes:
+The preprocessing workflow includes:
 
-* Handling missing values
-* Identifying and handling outliers where appropriate
-* Encoding categorical variables
-* Scaling numerical features when required
-* Separating features and target variables
-* Splitting the dataset into training and testing sets
+* Separation of input features and target variables
+* Encoding of categorical features
+* Transformation of numerical features where required
+* Preparation of training and testing data
+* Consistent preprocessing of data before prediction
 
-Care is taken to ensure that preprocessing is performed without introducing data leakage between training and testing data.
+The preprocessing pipeline used during model training is saved as:
+
+```text
+preprocessor.pkl
+```
+
+This allows the same preprocessing workflow to be applied when new user inputs are passed through the Streamlit application.
 
 ---
 
-## Models
+## Machine Learning Models
 
-### Regression
+### Premium Prediction
 
-The regression component is used to estimate insurance premium amounts.
+A regression model was trained to predict the continuous `premium_amount` target.
 
-Potential regression models explored in the project include:
+The final trained regression model is stored as:
 
-* Linear Regression
-* Decision Tree Regressor
-* Random Forest Regressor
+```text
+premium_prediction_model.pkl
+```
 
-The final model is selected based on its performance on the evaluation dataset.
+### Claim Risk Prediction
 
-### Classification
+A classification model was trained to predict the `claim_risk` target.
 
-The classification component is used to predict claim risk.
+The final trained classification model is stored as:
 
-Models explored include:
+```text
+claim_risk_model.pkl
+```
 
-* Logistic Regression
-* Decision Tree Classifier
-* Random Forest Classifier
-
-Model selection is based on appropriate classification metrics rather than accuracy alone.
+The final models were selected based on their evaluation performance during the model development process.
 
 ---
 
 ## Model Evaluation
 
-### Regression Metrics
+### Regression
 
-Regression models are evaluated using metrics such as:
+The premium prediction model was evaluated using regression performance measures, including:
 
-* **MAE (Mean Absolute Error)**
-* **MSE (Mean Squared Error)**
-* **RMSE (Root Mean Squared Error)**
-* **R² Score**
+* R² Score
+* Mean Absolute Error (MAE)
+* Mean Squared Error (MSE)
+* Root Mean Squared Error (RMSE)
 
-These metrics help measure how accurately the model predicts insurance premium amounts.
+The final model achieved an **R² score of 0.9590**.
 
-### Classification Metrics
+### Classification
 
-Classification models are evaluated using:
+The claim-risk model was evaluated using classification performance measures including:
 
-* **Accuracy**
-* **Precision**
-* **Recall**
-* **F1-Score**
-* **Confusion Matrix**
+* Accuracy
+* ROC-AUC
 
-Where appropriate, additional metrics such as ROC-AUC can also be considered.
+The final classification model achieved:
 
----
+* **Accuracy: 72.25%**
+* **ROC-AUC: 0.8023**
 
-## Key Skills Demonstrated
-
-This project demonstrates practical experience with:
-
-* Python
-* NumPy
-* Pandas
-* Matplotlib
-* Seaborn
-* Scikit-learn
-* Exploratory Data Analysis
-* Data Preprocessing
-* Feature Engineering
-* Regression
-* Classification
-* Model Evaluation
-* Data Visualization
-* Machine Learning Workflow
+These metrics were used to assess the model's predictive performance on the evaluation data.
 
 ---
 
-## Tech Stack
+## Streamlit Application
 
-| Technology       | Purpose                                |
-| ---------------- | -------------------------------------- |
-| Python           | Core programming language              |
-| Pandas           | Data manipulation and analysis         |
-| NumPy            | Numerical computing                    |
-| Matplotlib       | Data visualization                     |
-| Seaborn          | Statistical visualization              |
-| Scikit-learn     | Machine learning and preprocessing     |
-| Jupyter Notebook | Experimentation and analysis           |
-| Git & GitHub     | Version control and project management |
+The trained machine learning models are integrated into a Streamlit application.
+
+The application provides two main sections:
+
+### Prediction
+
+The prediction interface allows the user to enter the required insurance-related information and obtain:
+
+* Predicted insurance premium
+* Predicted claim risk
+
+The application loads the saved preprocessing pipeline and trained models to generate predictions.
+
+### About Project
+
+The About Project section provides information about:
+
+* Project purpose
+* Machine learning approach
+* Dataset
+* Technologies used
+* Project workflow
+
+### Light & Dark Mode
+
+The application includes a complete **light/dark theme system**.
+
+The theme changes consistently across the interface, including:
+
+* Backgrounds
+* Cards
+* Text
+* Input fields
+* Buttons
+* Borders
+* Navigation elements
+* Prediction results
+
+---
+
+## Technology Stack
+
+| Technology           | Purpose                                      |
+| -------------------- | -------------------------------------------- |
+| **Python**           | Core programming and ML workflow             |
+| **Pandas**           | Data manipulation and analysis               |
+| **NumPy**            | Numerical computing                          |
+| **Matplotlib**       | Data visualization                           |
+| **Seaborn**          | Statistical visualization                    |
+| **Scikit-learn**     | Preprocessing, model training and evaluation |
+| **Jupyter Notebook** | Data analysis and model development          |
+| **Streamlit**        | Interactive prediction interface             |
+| **CSS**              | Custom application styling                   |
+| **Git & GitHub**     | Version control and project management       |
 
 ---
 
 ## Project Structure
 
 ```text
-Insurance Claim Risk/
+Insurance-Claim-Project/
+│
 ├── app.py
 ├── theme.py
 ├── style.css
-├── requirements.txt
 ├── README.md
 ├── Insurance_Claim_Risk_Predictor.ipynb
 ├── insurance_claim_data.csv
 ├── preprocessor.pkl
 ├── premium_prediction_model.pkl
 ├── claim_risk_model.pkl
+│
 └── pages/
     ├── 1_Predict.py
     └── 2_About_Project.py
 ```
 
----
+### Important Files
 
-## Results
+**`app.py`**
+Main entry point of the Streamlit application.
 
-The project evaluates both machine learning tasks independently.
+**`theme.py`**
+Manages the application's light and dark theme functionality.
 
-### Premium Prediction
+**`style.css`**
+Contains custom styling used to create the application's visual design.
 
-The regression models are compared using MAE, RMSE, and R² to determine which model provides the most reliable premium predictions.
+**`Insurance_Claim_Risk_Predictor.ipynb`**
+Contains the data analysis, exploratory analysis, preprocessing, model development and evaluation workflow.
 
-### Claim Risk Prediction
+**`insurance_claim_data.csv`**
+Contains the synthetic insurance dataset used for model development.
 
-The classification models are compared using accuracy, precision, recall, F1-score, and confusion matrices to identify the most suitable model for claim-risk prediction.
+**`preprocessor.pkl`**
+Saved preprocessing pipeline used to transform input data before prediction.
 
-**Final model performance and visual results will be documented here after model evaluation.**
+**`premium_prediction_model.pkl`**
+Saved trained regression model for premium prediction.
+
+**`claim_risk_model.pkl`**
+Saved trained classification model for claim-risk prediction.
+
+**`pages/1_Predict.py`**
+Contains the prediction interface.
+
+**`pages/2_About_Project.py`**
+Contains information about the project and its implementation.
 
 ---
 
 ## Business Applications
 
-The concepts demonstrated in this project can be applied to real-world insurance workflows such as:
+The machine learning concepts demonstrated in this project can support insurance-related use cases such as:
 
 * Premium estimation
-* Customer risk segmentation
+* Customer risk assessment
 * Underwriting support
-* Claim-risk assessment
+* Claim-risk analysis
 * Customer profiling
-* Data-driven insurance decision making
+* Data-driven insurance decision support
 
-The project is intended as an educational machine learning implementation and does not represent a production insurance underwriting system.
+This project is intended as an **educational and portfolio implementation** and is not designed to replace professional insurance underwriting or claims assessment.
 
 ---
 
-## Future Improvements
+## Future Scope
 
-Possible extensions include:
+Possible future extensions include:
 
-* Hyperparameter tuning using GridSearchCV or RandomizedSearchCV
+* Hyperparameter optimization
 * Cross-validation for more robust model evaluation
-* Advanced ensemble models such as XGBoost or Gradient Boosting
-* Explainable AI using SHAP
-* Automated ML pipelines
-* Model deployment using Streamlit or FastAPI
-* Cloud deployment
+* Advanced ensemble models
+* Explainable AI techniques such as SHAP
 * Real-world insurance datasets
-* Integration of a database for storing predictions
-* Monitoring model performance after deployment
+* Database integration
+* Prediction history and analytics
+* Cloud deployment
+* Model monitoring and performance tracking
+
+These are **future possibilities and are not part of the current implementation**.
 
 ---
 
-## How to Run the Project
+## How to Run
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Sumaira-K/Insurance-Claim-Project.git
 cd Insurance-Claim-Project
 ```
 
-### 2. Create a virtual environment
+### 2. Create a Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-### 3. Activate the virtual environment
+### 3. Activate the Environment
 
 **Windows:**
 
@@ -307,52 +406,60 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
-**macOS / Linux:**
+**macOS/Linux:**
 
 ```bash
 source venv/bin/activate
 ```
 
-### 4. Install dependencies
+### 4. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### Run the Streamlit predictor
-
-Start the dashboard from the project root:
+### 5. Run the Streamlit Application
 
 ```bash
 streamlit run app.py
 ```
 
-The prediction page opens with the existing trained models. Use the theme button in the upper-right corner to switch the complete interface between light and dark mode.
+The application provides the prediction interface along with the project information page.
 
-### 5. Run the Jupyter Notebook
+The theme control allows users to switch between **light and dark mode**.
+
+### 6. Run the Jupyter Notebook
 
 ```bash
 jupyter notebook
 ```
 
-Open the project notebook and execute the cells sequentially.
+Open:
+
+```text
+Insurance_Claim_Risk_Predictor.ipynb
+```
+
+and execute the notebook cells sequentially.
 
 ---
 
 ## Learning Outcomes
 
-Through this project, I developed practical experience in building machine learning solutions from raw data to model evaluation.
+This project provided practical experience in developing a machine learning solution from dataset generation through deployment-oriented integration.
 
-The project strengthened my understanding of:
+Key learning outcomes include:
 
-* Translating business problems into machine learning problems
-* Choosing regression vs. classification approaches
-* Preparing real-world style datasets
+* Translating a real-world problem into regression and classification tasks
+* Working with numerical and categorical features
 * Performing exploratory data analysis
-* Building reproducible preprocessing workflows
-* Comparing machine learning models
-* Selecting evaluation metrics based on the problem
-* Interpreting machine learning results
+* Building preprocessing pipelines
+* Training supervised machine learning models
+* Evaluating regression and classification models
+* Saving trained models for reuse
+* Integrating machine learning models into a Streamlit application
+* Designing a modular and user-friendly ML interface
+* Managing a project using Git and GitHub
 
 ---
 
@@ -360,7 +467,7 @@ The project strengthened my understanding of:
 
 **Sumaira K**
 
-B.Tech Computer Science Engineering Student
+B.Tech Computer Science and Engineering Student
 
 GitHub: [Sumaira-K](https://github.com/Sumaira-K)
 
@@ -368,4 +475,4 @@ GitHub: [Sumaira-K](https://github.com/Sumaira-K)
 
 ## License
 
-This project is intended for educational and portfolio purposes.
+This project is developed for **educational and portfolio purposes**.
